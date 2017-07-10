@@ -1,6 +1,5 @@
 //Dijkstra算法获取最短路径（邻接表实现）
 //包括有向图和无向图
-//段错误
 
 #include <iostream>
 #include <iomanip>
@@ -46,7 +45,7 @@ class ListUDG
  private:
      int mVexNum;//顶点数目
      int mEdgNum;//边的数目
-     VNode *mVexs;//顶点数组
+     VNode mVexs[MAX];//顶点数组
 
  public:
      ListUDG();
@@ -115,6 +114,7 @@ ListUDG::ListUDG(char vexs[], int vlen, EData *edges[], int elen)
     }
 }
 
+/*
 //析构函数
 ListUDG::~ListUDG()
 {
@@ -131,7 +131,7 @@ ListUDG::~ListUDG()
     }
 
     delete[] mVexs;
-}
+}*/
 
 //将node节点链接到list的最后
 void ListUDG::linkLast(ENode *list, ENode *node)
