@@ -1,5 +1,6 @@
 //Dijkstra算法获取最短路径（邻接表实现）
 //包括有向图和无向图
+//段错误
 
 #include <iostream>
 #include <iomanip>
