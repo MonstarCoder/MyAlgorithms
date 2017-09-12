@@ -1,6 +1,3 @@
-//归并排序，运用分治的思想
-//段错误，核心已转储！
-
 #include <iostream>
 using std::cout;
 using std::endl;
@@ -15,17 +12,9 @@ void merge(int* a, int start, int mid, int end)//合并两个数组
     while (i <= mid && j <= end)
     {
         if (a[i] < a[j])
-        {
-            tmp[k] = a[i];
-            ++k;
-            ++i;
-        }
+            tmp[k++] = a[i++];
         else
-        {
             tmp[k++] = a[j++];
-            ++k;
-            ++j;
-        }
     }
 
     for (; i <= mid; ++i, ++k)
@@ -45,7 +34,7 @@ void mergeSortUp2Down(int* a, int start, int end)//归并排序，从上往下
     if (a == nullptr || start >= end)
         return ;
 
-    int mid = (end - start) / 2;
+    int mid = (end + start) / 2;
 
     mergeSortUp2Down(a, start, mid);
     mergeSortUp2Down(a, mid + 1, end);
