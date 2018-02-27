@@ -1,52 +1,41 @@
 //快速排序
-//核心已转储
 
 #include <iostream>
 #include <algorithm>
 using std::cout;
 using std::endl;
 
-int Median3(int* a, int left, int right)
+void quickSort(int* a, int begin, int end)
 {
-    int center = (left + right) / 2;
+    if (a == NULL || begin >= end)
+        return;
 
-    if (a[left] > a[center])
-        std::swap(a[left], a[center]);
-    if (a[left] > a[right])
-        std::swap(a[left], a[right]);
-    if (a[center] > a[right])
-        std::swap(a[center], a[right]);
+    int center = (begin + end) / 2;
 
-    std::swap(a[center], a[right - 1]);//将枢纽元存储在a[right - 1];
-
-    return a[right - 1];
-}
-
-void quickSort(int* a, int left, int right)
-{
-    if (left < right)
+    if (a[begin] > a[center])
+        std::swap(a[begin], a[center]);
+    if (a[begin] > a[end])
+        std::swap(a[begin], a[end]);
+    if (a[center] > a[end]) 
+        std::swap(a[center], a[end]);
+    
+    std::swap(a[end - 1], a[center]);
+    
+    int left = begin;
+    int right = end - 1;
+    while (left < right)
     {
-        int i, j, pivot;
-        i = 1;
-        j = right - 1;
- //       pivot = a[i];
-        pivot = Median3(a, left, right);//选择三数中值作为枢纽元并调整枢纽元位置
+        while (a[++left] < a[end]);
+        while (a[--right] > a[end]);
 
-        for (; ;)
-        {
-            while (a[++i] < pivot) {}
-            while (a[--j] > pivot) {}
-            if (i < j)
-                std::swap(a[i], a[j]);
-            else
-                break;
-        }
-
-        std::swap(a[i], a[right -1]);//将枢纽元与最后i所指元素交换
-
-        quickSort(a, left, i -1);//递归调用
-        quickSort(a, i + 1, right);
+        if (left < right)
+            std::swap(a[left], a[right]);
     }
+
+    std::swap(a[left], a[end - 1]);
+
+    quickSort(a, begin, left - 1);
+    quickSort(a, left + 1, end);
 }
 
 int main()
@@ -61,7 +50,7 @@ int main()
         cout << a[i] << " ";
     cout << endl;
 
-    quickSort(a, 0, ilen -1);
+    quickSort(a, 0, ilen - 1);
 
     cout << "after sort:" << endl;
     for (i = 0; i < ilen; ++i)
