@@ -432,6 +432,7 @@ AVLTreeNode<T>* AVLTree<T>::remove(AVLTreeNode<T>* &tree, AVLTreeNode<T>* z)
             delete tmp;
         }
     }
+    tree->height = max(height(tree->left), height(tree->right)) + 1;
     return tree;
 }
 
